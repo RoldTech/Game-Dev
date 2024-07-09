@@ -1,0 +1,207 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #a8e063, #56ab2f);
+    overflow: hidden;
+    position: relative;
+}
+
+body::before, body::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNSIgaGVpZ2h0PSI1IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1IDUiPjxjaXJjbGUgY3g9IjIuNSIgY3k9IjIuNSIgcj0iMiIgZmlsbD0icmdiYSg1NSw1NSw1NSwwLjgpIiAvPjwvc3ZnPg==');
+    background-size: contain;
+    animation: sprinkle 10s infinite linear;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+body::after {
+    animation-delay: 5s;
+}
+
+@keyframes sprinkle {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    pointer-events: none;
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Additional floating shapes */
+.shape {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    animation: float 15s infinite ease-in-out;
+    pointer-events: none;
+}
+
+.shape:nth-child(1) {
+    width: 60px;
+    height: 60px;
+    top: 10%;
+    left: 15%;
+    animation-duration: 12s;
+    animation-delay: -2s;
+}
+
+.shape:nth-child(2) {
+    width: 80px;
+    height: 80px;
+    top: 30%;
+    left: 70%;
+    animation-duration: 18s;
+    animation-delay: -4s;
+}
+
+.shape:nth-child(3) {
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 20%;
+    animation-duration: 25s;
+    animation-delay: -6s;
+}
+
+.shape:nth-child(4) {
+    width: 120px;
+    height: 120px;
+    top: 70%;
+    left: 50%;
+    animation-duration: 20s;
+    animation-delay: -8s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    50% {
+        transform: translateY(-20px) translateX(20px);
+    }
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}
+
+.container {
+    text-align: center;
+    z-index: 1;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+    width: 300px;
+    max-width: 90vw;
+}
+
+.cell {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.status {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+.accuracy {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+#restartButton, #newGameButton {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #56ab2f;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#restartButton:hover, #newGameButton:hover {
+    background-color: #a8e063;
+}
+
+.result-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s;
+}
+
+.result-screen.visible {
+    visibility: visible;
+    opacity: 1;
+}
